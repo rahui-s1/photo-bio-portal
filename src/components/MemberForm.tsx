@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { Member, Address } from "@/types/member";
@@ -10,9 +9,6 @@ import BiometricCapture from "./BiometricCapture";
 import AddressSelect from "./AddressSelect";
 import { motion } from "framer-motion";
 import { ChevronDown, PlusCircle } from "lucide-react";
-
-// Add framer-motion dependency
-<lov-add-dependency>framer-motion@latest</lov-add-dependency>
 
 interface MemberFormProps {
   onSubmit: (member: Member) => void;
@@ -51,7 +47,6 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit, initialData }) => {
     setIsSubmitting(true);
     
     try {
-      // Construct member data
       const memberData: Member = {
         id: initialData?.id,
         name,
@@ -61,7 +56,6 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit, initialData }) => {
         createdAt: initialData?.createdAt || new Date(),
       };
       
-      // Submit data
       await onSubmit(memberData);
       
       toast({
@@ -69,7 +63,6 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit, initialData }) => {
         description: "Member information saved successfully",
       });
       
-      // Reset form if needed
       if (!initialData) {
         setName("");
         setAddress(undefined);
