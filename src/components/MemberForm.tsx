@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { Member, Address } from "@/types/member";
@@ -7,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import CameraCapture from "./CameraCapture";
 import BiometricCapture from "./BiometricCapture";
 import AddressSelect from "./AddressSelect";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, PlusCircle } from "lucide-react";
 
 interface MemberFormProps {
@@ -123,16 +124,21 @@ const MemberForm: React.FC<MemberFormProps> = ({ onSubmit, initialData }) => {
         <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${isActive ? "rotate-180" : ""}`} />
       </div>
       
-      <motion.div 
-        initial={false}
-        animate={{ height: isActive ? "auto" : 0, opacity: isActive ? 1 : 0 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="overflow-hidden"
-      >
-        <div className="p-4 border-t bg-white">
-          {children}
-        </div>
-      </motion.div>
+      <AnimatePresence>
+        {isActive && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="p-4 border-t bg-white">
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 
