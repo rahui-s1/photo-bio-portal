@@ -111,7 +111,7 @@ const AddressSelect: React.FC<AddressSelectProps> = ({ onSelect, currentAddress 
             {mockAddresses.map((address, index) => (
               <CommandItem
                 key={index}
-                value={address.street}
+                value={address.street || ''}
                 onSelect={() => handleSelect(address)}
                 className="cursor-pointer py-3"
               >
